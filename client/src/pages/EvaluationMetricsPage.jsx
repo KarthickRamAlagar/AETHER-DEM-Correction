@@ -1,3 +1,4 @@
+import { API_BASE } from "../lib/apiBase";
 import { useEffect, useMemo, useState } from "react";
 import { BarChart3, FileDown } from "lucide-react";
 import { Card, Note } from "./evaluation/ui";
@@ -6,7 +7,7 @@ import SpatialSection from "./evaluation/SpatialSection";
 import { buildEval } from "./evaluation/derive";
 import { generateEvalPdf } from "./evaluation/evalPdf";
 
-const BASE = "http://localhost:8000/api";
+const BASE = API_BASE;
 
 async function getJson(url) {
   const r = await fetch(url);
@@ -41,10 +42,10 @@ export default function EvaluationMetricsPage() {
     try { return buildEval(bench); } catch { return null; }
   }, [bench]);
 
-  const downloadPdf = () => {
+  const downloadPdf = async () => {
     if (!e) return;
     try {
-      generateEvalPdf({ e, spatial });
+      await generateEvalPdf({ e, spatial });
       setPdfMsg("PDF downloaded");
     } catch (err) {
       setPdfMsg("Could not create the PDF");

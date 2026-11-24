@@ -18,3 +18,15 @@ client/dist/
 # keep the model evidence (small files)
 !outputs/*.csv
 !outputs/*.json
+gateway/.env
+gateway/node_modules/
+mlflow/
+
+# evidence packs are rebuilt, installers are local
+evidence/
+sdg_apply*.py
+datasets_review.txt
+# patch 8c: local service paths, rendered configs (hold the monitor secret), run files
+ops/ops_config.json
+ops/_rendered/
+ops/run/
